@@ -15,7 +15,7 @@ import { ResponseApi } from 'src/app/model/response-api';
 export class TicketNewComponent implements OnInit {
 
   @ViewChild("form")
-  form: NgForm
+  form: NgForm;
 
   ticket = new Ticket('', 0, '', '', '', '', null, null, '', null);
   shared: SharedService;
@@ -73,7 +73,7 @@ export class TicketNewComponent implements OnInit {
       });
     } else {
       this.ticket.image = '';
-      var reader = new FileReader();
+      let reader = new FileReader();
       reader.onloadend = (e: Event) => {
         this.ticket.image = reader.result;
       };

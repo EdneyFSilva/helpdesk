@@ -1,10 +1,10 @@
 import { TicketService } from './../../services/ticket.service';
 import { DialogService } from './../../services/dialog.service';
-import { SharedService } from 'src/app/services/shered.service';
+import { SharedService } from './../../services/shered.service';
 import { Component, OnInit } from '@angular/core';
-import { Ticket } from 'src/app/model/ticket.model';
+import { Ticket } from './../../model/ticket.model';
 import { Router } from '@angular/router';
-import { ResponseApi } from 'src/app/model/response-api';
+import { ResponseApi } from './../../model/response-api';
 
 @Component({
   selector: 'app-ticket-list',
@@ -13,9 +13,9 @@ import { ResponseApi } from 'src/app/model/response-api';
 })
 export class TicketListComponent implements OnInit {
 
-  assignedToMe: boolean = false;
-  page: number = 0;
-  count: number = 5;
+  assignedToMe = false;
+  page = 0;
+  count = 5;
   pages: Array<number>;
   shared: SharedService;
   message: {};

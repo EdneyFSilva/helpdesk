@@ -1,3 +1,4 @@
+import { TicketDetailComponent } from './components/ticket-detail/ticket-detail.component';
 import { LoginComponent } from './components/secutiry/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import {Routes, RouterModule} from '@angular/router';
@@ -16,7 +17,8 @@ export const ROUTES: Routes = [
     {path: 'user-list', component: UserListComponent, canActivate: [AuthGuard] },
     {path: 'ticket-new', component: TicketNewComponent, canActivate: [AuthGuard] },
     {path: 'ticket-new/:id', component: TicketNewComponent, canActivate: [AuthGuard] },
-    {path: 'ticket-list', component: TicketListComponent, canActivate: [AuthGuard] }
+    {path: 'ticket-list', component: TicketListComponent, canActivate: [AuthGuard] },
+    {path: 'ticket-detail/:id', component: TicketDetailComponent, canActivate: [AuthGuard] }
 ];
 
 export const routes: ModuleWithProviders = RouterModule.forRoot(ROUTES);
