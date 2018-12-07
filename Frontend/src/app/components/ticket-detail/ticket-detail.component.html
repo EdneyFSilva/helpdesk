@@ -10,20 +10,20 @@
       <div class="box-body">
         <ul class="list-group list-group-unbordered">
           <li class="list-group-item">
-            <b>Number:</b><span>{{ ticket.number }}</span>
-            <span class="pull-right"><b>Title:</b><span>{{ticket.title }}</span></span>
+            <b>Number: </b><span>{{ ticket.number }}</span>
+            <span class="pull-right"><b>Title: </b><span>{{ticket.title }}</span></span>
           </li>
           <li class="list-group-item">
-            <b>Priority:</b><span>{{ ticket.priotiry }}</span>
-            <span class="pull-right"><b>Created by:</b><span>{{ticket?.user?.email }}</span></span>
+            <b>Priority: </b><span>{{ ticket.priority }}</span>
+            <span class="pull-right"><b>Created by: </b><span>{{ticket?.user?.email }}</span></span>
           </li>
           <li class="list-group-item">
-            <b>Status:</b><span>{{ ticket.status }}</span>
-            <span class="pull-right"><b>Assigned to:</b><span>{{ticket?.assigned?.email }}</span></span>
+            <b>Status: </b><span>{{ ticket.status }}</span>
+            <span class="pull-right"><b>Assigned to: </b><span>{{ticket?.assignedUser?.email }}</span></span>
           </li>
           <li class="list-group-item">
-            <b>Date:</b><span>{{ ticket.date | date: 'dd/MM/yyyy HH:mm:ss' }}</span>
-            <span class="pull-right"><b>Description:</b><span>{{ticket.description }}</span></span>
+            <b>Date: </b><span>{{ ticket.date | date: 'dd/MM/yyyy HH:mm:ss' }}</span>
+            <span class="pull-right"><b>Description: </b><span>{{ ticket.description }}</span></span>
           </li>
           <li class="list-group-item">
             <span><img [src]="ticket.image" width="458px" height="370px"></span>
@@ -34,15 +34,32 @@
                   <th>Date change Status</th>
                   <th>Status</th>
                 </tr>
-                <tr *ngFor="let change of changes">
-                  <td>{{ change?.userChange.email</td>
+                <tr *ngFor="let change of ticket.changes">
+                  <td>{{ change?.userChange.email }}</td>
                   <td>{{ change?.dateChangeStatus | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
-                  <td>{{ change?.status</td>
+                  <td>{{ change?.status }}</td>
                 </tr>
               </table>
             </span>
           </li>
         </ul>
+      </div>
+      <div class="box-footer">
+        <button *ngIf="shared.user.profile == 'TECHNICIAN' && ticket.status == 'New'" 
+                class="btn btn-primary" 
+                (click)="changeStatus('Assigned')">Accept</button>
+        <button *ngIf="shared.user.profile == 'TECHNICIAN' && (ticket.status == 'Assigned' || ticket.status == 'Disapproved')" 
+                class="btn btn-primary" 
+                (click)="changeStatus('Resolved')">Solve</button>
+        <button *ngIf="shared.user.profile == 'CUSTOMER' && ticket.status == 'Resolved'" 
+                class="btn btn-primary" 
+                (click)="changeStatus('Approved')">Approve</button>
+        <button *ngIf="shared.user.profile == 'CUSTOMER' && ticket.status == 'Resolved'" 
+                class="btn btn-primary" 
+                (click)="changeStatus('Disapproved')">Disapprove</button>
+        <button *ngIf="shared.user.profile == 'TECHNICIAN' && ticket.status == 'Approved'" 
+                class="btn btn-primary" 
+                (click)="changeStatus('Closed')">Close</button>
       </div>
     </form>
   </div>
